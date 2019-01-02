@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+     <!-- 手机模式必备 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>demo3</title>
+    <script>
+      // 计算rem
+      document.documentElement.style.fontSize = window.innerWidth / 750 * 100 + 'px';
+    </script>
+      <!-- 引入移动端调试工具 -->
+  <script src="//cdn.jsdelivr.net/npm/eruda"></script>
+  <script>
+    eruda.init();
+    //禁用客户端右上角的功能按钮
+    window['CHELUN_SHOW_MENU_ITEMS'] = ['menu:refresh', 'menu:share:wxMessage', 'menu:share:wxTimeline'];
+  </script>
+  <style>
+    body {
+      font-size: 0.32rem;
+    }
+  </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script src="./dist/build.js"></script>
+  </body>
+</html>

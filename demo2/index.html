@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <!-- 手机模式必备 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <title>补换驾照</title>
+  <script>
+    // 计算rem
+    document.documentElement.style.fontSize = window.innerWidth / 750 * 100 + 'px';
+  </script>
+
+  <!-- <script>
+      // 计算rem
+      var fun = function (doc, win) {
+        var docEl = doc.documentElement,
+            resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+            recalc = function () {
+                var clientWidth = docEl.clientWidth;
+                if (!clientWidth) return;
+
+                //这里是假设在750px宽度设计稿的情况下，1rem = 100px；
+                //可以根据实际需要修改
+                docEl.style.fontSize =  (clientWidth / 750)*100 + 'px';
+            };
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt, recalc, false);
+        doc.addEventListener('DOMContentLoaded', recalc, false);
+      }
+      fun(document, window);
+    </script> -->
+  <!-- 引入移动端调试工具 -->
+  <script src="//cdn.jsdelivr.net/npm/eruda"></script>
+  <script>
+    eruda.init();
+    //禁用客户端右上角的功能按钮
+    window['CHELUN_SHOW_MENU_ITEMS'] = ['menu:refresh', 'menu:share:wxMessage', 'menu:share:wxTimeline'];
+  </script>
+  <style>
+    body {
+      font-size: 0.32rem;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script src="./dist/build.js"></script>
+</body>
+
+</html>
