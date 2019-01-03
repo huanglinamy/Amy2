@@ -29,12 +29,13 @@ const state = {
 }
 
 const mutations = {
-  upadteList(state, payload){
-    state[payload.index].src = payload.src
+  updateList(state, payload){
+    state.list[payload.index].src = payload.src
   }
 }
 
 export default {
+  namespaced: true,
   state,
-  //muatations
+  mutations
 }

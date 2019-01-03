@@ -78,9 +78,22 @@ module.exports = {
     extensions: ['*', '.js', '.vue', '.json']
   },
   devServer: {
+     // 强制重定向404到index.html
     historyApiFallback: true,
+     // 控制层不输出构建信息
     noInfo: true,
-    overlay: true
+     // 错误遮罩层
+    overlay: true,
+     // 代理
+     proxy: {
+      '/api': {
+        target: 'https://chezhu.eclicks.cn/',
+        changeOrigin: true,
+        pathRewrite: {
+          '/api': '/'
+        }
+      }
+    }
   },
   performance: {
     hints: false

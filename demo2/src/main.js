@@ -4,6 +4,11 @@ import App from './App.vue'
 import router from '@/routes/index'
 // 引入store
 import store from '@/store/index'
+// 引入Vant
+import { Popup,Picker, } from 'vant';
+
+Vue.use(Popup);
+Vue.use(Picker);
 
 new Vue({
   el: '#app',
@@ -11,4 +16,3 @@ new Vue({
   store,
   render: h => h(App)
 })
-
