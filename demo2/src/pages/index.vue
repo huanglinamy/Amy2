@@ -18,7 +18,7 @@
 
           <div class="serverprice">
                 <span>服务费</span>
-                <span>￥999</span>
+                <span>￥398</span>
           </div>
           <div class="discounts">
               <span>优惠</span>
@@ -26,7 +26,7 @@
           </div>
     </div>
         <div class="footer">
-            <b>实付: <em>￥999</em></b>
+            <b>实付: <em>￥398</em></b>
              <button>立即支付</button>
         </div>
    </div>
@@ -86,7 +86,7 @@ export default {
   text-align: center;
   line-height: 0.8rem;
   font-weight: 400;
-  font-size:0.25rem;
+  font-size:0.26rem;
   color:rgb(54, 153, 247);
   border-right:0.01rem solid rgba(0,0,0,0.6);
 }
@@ -130,9 +130,8 @@ export default {
   font-size:0.32rem;
 }
 .serverprice>span:nth-of-type(2){
-  color:#f50;
-  font-weight: 800;
-  font-size: 0.38rem;
+  color:rgb(255, 87, 75);
+  font-size: 0.4rem;
 }
 
 .discounts{
@@ -158,19 +157,21 @@ export default {
   padding:0 0.2rem;
   background:#fff;
 }
+.footer>b{
+  font-weight: normal;
+}
 .footer>b>em{
-  color:#f50;
-  font-weight: 800;
+  color:rgb(255, 87, 75);
   font-style:normal;
-  font-size:0.38rem;
+  font-size:0.4rem;
 }
 .footer>button{
   width:2rem;
   height:1rem;
   border:0;
   outline: none;
-  background:rgb(175, 172, 172);
-  color:#fff;
+  background:rgba(0,0,0,0.3);
+  color:#ffffff;
   font-size:0.35rem;
   border-radius: 0.1rem;
 }
