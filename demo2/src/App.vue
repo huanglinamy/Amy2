@@ -6,27 +6,26 @@
 </template>
 
 <script>
-// import JSBridge from './utils/JSBridge.js';
+import JSBridge from './utils/JSBridge.js';
 export default {
   name: 'app',
   data () {
     return {
-      
     }
   },
-  //  methods: {
-  //   login(){
-  //     //登录
-  //     JSBridge.invoke('app', 'login1000000000', {
-  //       loginCallBackName: res=>{
-  //         console.log('res...', res);
-  //       },
-  //       a: 1,
-  //       b: 2,
-  //       c: 3
-  //     });
-  //   }
-  // }
+  methods: {
+    login(){
+      //登录
+      JSBridge.invoke('app', 'login999', {
+        loginCallBackName: res=>{
+          console.log('res...', res);
+        },
+        a: 1,
+        b: 2,
+        c: 3
+      });
+    }
+  }
 }
 </script>
 
