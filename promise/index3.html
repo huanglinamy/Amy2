@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // # 虚拟dom
+
+        // # 传统操作dom绑定数据的方式及调优
+        // 1 document.createElement()
+        // 2 innerHTML
+
+        // 调优思路
+        // 通过createElement()创建dom需要频繁的插入节点，导致页面进行大量重绘，性能很差
+        // 我们可以通过 document.documentCreateFragement() 片段来完成dom 操作一次性插入到节点当中
+
+
+        // # jsx(javascript and xml)
+        // 概念 类似xml的一个JavaScript 语法扩展
+        // 特点
+        // 模拟
+        //创建好的对象就是一个虚拟dom
+        createElement(tag, attrs, ...children) {
+            //模拟dom树，返回一个js对象
+            return {
+                tag,
+                attrs,
+                children
+            }
+        }
+        // # 虚拟dom
+        // 用途 通过创建虚拟dom与原dom树的比较，插入更新模板
+        // 算法 diff算法
+        // 模拟
+        const render = (vnode, container) => {
+            //判断节点类型
+            if (typeof vnode === "string") {
+                const textNode = document.createTextNode(vnode)
+                return container.appendChild(textNode)
+            }
+            //创建虚拟dom节点
+            const virtualDom = document.createElement(vnode.tag);
+            if (vnode.attrs) {
+                Object.keys(vnode.attrs).forEach(key => {
+                    if (key === "className") {
+                        virtualDom.setAttribute("class", vnode.attrs[key])
+                    } else {
+                        virtualDom.setAttribute(key, vnode.attrs[key])
+                    }
+                })
+            }
+            //遍历子元素，递归调用，并绑定元素
+            vnode.children.forEach(child => {
+                return render(child, virtualDom)
+            })
+            // 将生成的虚拟dom树渲染
+            return container.appendChild(virtualDom)
+        }
+
+        // # 总结
+        // react 综合渲染性能较强
+        // 结合了jsx以及dif算法，通过创建虚拟dom与原dom树的比较，替换需要更新的模板，完成数据绑定
+        // 误区
+        // 一般情况下，原生js实现渲染性能好，从普适性和整体性能来看，react做的diff算法在前端框架中较好
+    </script>
+</body>
+
+</html>

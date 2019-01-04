@@ -1,0 +1,89 @@
+/* 
+.normal {
+  font-family: Georgia, sans-serif;
+  margin-top: 3em;
+  text-align: center;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: normal;
+  letter-spacing: -1px;
+}
+
+.welcome {
+  height: 328px;
+  background: url(../assets/yay.jpg) no-repeat center 0;
+  background-size: 388px 328px;
+}
+
+.list {
+  font-size: 1.2em;
+  margin-top: 1.8em;
+  list-style: none;
+  line-height: 1.5em;
+}
+
+.list code {
+  background: #f7f7f7;
+} */
+.wrap {
+  width: 1200px;
+  display: flex;
+  flex-direction: column;
+  background: #eee;
+  margin: 0 auto;
+}
+
+.tol {
+  width: 100%;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+  color: #f50;
+}
+
+.nav {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.3);
+  color: #fff;
+}
+
+span {
+  flex: 1;
+  height: 100%;
+  text-align: center;
+  line-height: 50px;
+}
+
+span:hover {
+  background: linear-gradient(45deg, #fd6666, #fd91d0, #f7a868);
+}
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
+
+.navcont {
+  widows: 100%;
+  background: #eee;
+}
+
+:global .red1 {
+  background: #ff8397;
+  height: 30px;
+  line-height: 30px;
+}
+
+:global .red2 {
+  background: #8a5bf8;
+  height: 30px;
+  line-height: 30px;
+}

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    MyPromises.prototype.resolve = function(res) {
+     if(this.status=='pennding'){
+       this.status = 'pullied'
+      setTimeout(()=>{
+       this.resolve(res)
+       this.reject(111)
+      },0)
+     }
+     console.log(this.status)
+    }
+    MyPromises.prototype.reject = function(res) {
+      if(this.status=='pennding'){
+        this.status = 'rejected'
+      setTimeout(()=>{
+       this.reject(res)
+      },0)
+      }
+    }
+    MyPromises.prototype.then = function(resolve, reject) {
+      this.resolve = resolve
+      this.reject = reject
+      this.status = 'pennding'
+    }
+   function MyPromises(func){
+     func(this.resolve.bind(this), this.reject.bind(this))
+   }
+   let url = 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543323274718&di=0e8ab45a3f7955a5be0a7e0a74097038&imgtype=0&src=http%3A%2F%2F00.minipic.eastday.com%2F20180509%2F20180509161611_f84f35ca9fddb1e4241fb74ac165cfe7_4.jpeg'
+  function loadImageAsync(url) {
+  return new MyPromises(function(resolve, reject) {
+    const image = new Image();
+    image.onload = function() {
+      resolve(image);
+    };
+    image.onerror = function() {
+      reject(new Error('Could not load image at ' + url));
+    };
+    image.src = url;
+  });
+}
+loadImageAsync(url).then(res=>{
+  document.body.appendChild(res)
+},err=> {
+  console.log(err)
+})
+  </script>
+</body>
+</html>

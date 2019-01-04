@@ -1,0 +1,90 @@
+/* 
+.normal {
+  font-family: Georgia, sans-serif;
+  margin-top: 3em;
+  text-align: center;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: normal;
+  letter-spacing: -1px;
+}
+
+.welcome {
+  height: 328px;
+  background: url(../assets/yay.jpg) no-repeat center 0;
+  background-size: 388px 328px;
+}
+
+.list {
+  font-size: 1.2em;
+  margin-top: 1.8em;
+  list-style: none;
+  line-height: 1.5em;
+}
+
+.list code {
+  background: #f7f7f7;
+} */
+
+.wrap{
+   width:1200px;
+   display:flex;
+   flex-direction: column;
+   background:#eee;
+   margin:0 auto;
+}
+
+.tol{
+  width:100%;
+  height:50px;
+  text-align:center;
+  line-height: 50px;
+  color:#f50;
+}
+
+.nav{
+  width:100%;
+  height:50px;
+  display:flex;
+  align-items: center; 
+  background:rgba(0,0,0,0.3);
+  color:#fff;
+}
+
+span{
+  flex:1;
+  height:100%;
+  text-align:center;
+  line-height: 50px;
+}
+
+span:hover{
+  background:linear-gradient(45deg,rgb(253, 102, 102),rgb(253, 145, 208),rgb(247, 168, 104));
+}
+
+.show{
+  display:block;
+}
+.hide{
+  display:none;
+}
+
+.navcont{
+   widows: 100%;
+   background:#eee;
+}
+ 
+:global{
+  .red1{
+    background:rgb(255, 131, 151);
+    height:30px;
+    line-height: 30px;
+  }
+  .red2{
+    background:rgb(138, 91, 248);
+    height:30px;
+    line-height: 30px;
+  }
+}

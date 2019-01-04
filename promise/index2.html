@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        img {
+            width: 200px;
+            height: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+    <script>
+        const urlArr = ['http://img4.imgtn.bdimg.com/it/u=729382916,2146689896&fm=26&gp=0.jpg',
+            'http://imgsrc.baidu.com/image/c0%3Dshijue1%2C0%2C0%2C294%2C40/sign=9b867a04b299a9012f38537575fc600e/4d086e061d950a7b86bee8d400d162d9f2d3c913.jpg',
+            'http://img2.3lian.com/2014/f4/139/d/119.jpg', 'http://img1.3lian.com/img013/v4/72/d/40.jpg',
+            'http://imgsrc.baidu.com/imgad/pic/item/34fae6cd7b899e51fab3e9c048a7d933c8950d21.jpg',
+            'http://pic26.photophoto.cn/20130320/0034034884481183_b.jpg']
+        const oBox = document.querySelector('.box')
+        var loadImg = (src) => {
+            return new Promise((resolve, reject) => {
+                var img = new Image();
+                img.src = src;
+                img.onload = () => {
+                    resolve(img);
+                }
+                img.onerror = () => {
+                    reject(new Error('加载失败'))
+                }
+            })
+        }
+        // // 并行
+        async function loading() {
+            return urlArr.map(async item => {
+                return await loadImg(item)
+            })
+        }
+
+        loading().then(rs => {
+            rs.forEach(item => {
+                item.then(IMG => {
+                    console.log(IMG);
+                    oBox.appendChild(IMG)
+                })
+            })
+        })
+    </script>
+</body>
+
+</html>

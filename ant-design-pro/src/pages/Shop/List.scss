@@ -1,0 +1,22 @@
+div{
+    width:100%;
+    // text-align:center;
+    margin:10px 0;
+}
+
+input{
+    width:60%;
+    height:30px;
+    border:none;
+    outline: none;
+    border:1px solid rgb(247, 79, 79);
+    margin:5px 0;
+    border-radius: 20px;
+    text-indent: 10px;
+    margin-left:10px;
+}
+
+input::-webkit-input-placeholder{
+    color:rgb(211, 210, 210);
+    font-size:12px;
+}

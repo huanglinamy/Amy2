@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        img{
+            width:150px;
+            height:150px;
+        }
+    </style>
+</head>
+
+<body>
+    <script type="text/javascript">
+        //第一种方法：
+        // 图片加载的promise
+        // function loadImg(url) {
+        //     return new Promise((resolve, reject) => {
+        //         var image = new Image();
+        //         image.onload = function () {
+        //             resolve(image);
+        //         }
+        //         image.onerror = function () {
+        //             reject(new Error('Could not load image at ' + url))
+        //         }
+        //         image.src = url
+        //     })
+        // }
+        //第二种方法：
+        // 图片加载的promise
+        // var loadImg = (src) => {
+        //     return new Promise((resolve, reject) => {
+        //         var img = new Image();
+        //         img.src = src;
+        //         img.onload = () => {
+        //             resolve(img);
+        //             // reject(new Error());
+        //         }
+        //         img.onerror = () => {
+        //             reject(new Error());
+        //         }
+        //     })
+        // }
+
+        // var urlImg = [
+        //     'https://i02picsos.sogoucdn.com/b793de99167f204e',
+        //     'https://i01picsos.sogoucdn.com/71c6e28591bf0edd',
+        //     'https://i01picsos.sogoucdn.com/67409105b44fc64c',
+        //     'https://i01picsos.sogoucdn.com/f2ecc0b5a67e87ed',
+        //     'https://i02picsos.sogoucdn.com/27d2495714f3f1e4',
+        //     'https://i03picsos.sogoucdn.com/11496e1b283be839',
+        //     'https://i02picsos.sogoucdn.com/cfb59b328cc73872',
+        //     'https://i01picsos.sogoucdn.com/0a5ff15a461e11ab',
+        //     'https://i01picsos.sogoucdn.com/0a5ff15a461e11ab',
+        //     'https://i01picsos.sogoucdn.com/5d48052cf61ff884'
+        // ]
+
+        // //第一种方法：自己
+        // var nex = []
+        // async function fn() {
+        //     try {
+        //         for (var i = 0; i < 10; i++) {
+        //             var img = await loadImg(urlImg[i]);
+        //             nex.push(img)
+        //         }
+        //     } catch (err) {
+        //         console.log(err);
+        //     }
+        //     for (let i = 0; i < nex.length; i++) {
+        //         document.body.appendChild(nex[i]);
+        //     }
+        //     return 100;
+        // }
+        // async function fn() {
+        //     for (var i = 0; i < 10; i++) {
+        //         var img = await loadImg(urlImg[i]);
+        //         document.body.appendChild(img);
+        //     }
+        // }
+        // fn().then(res => console.log('fn...', res));
+
+
+        // // 老师讲解三种方法：
+        // // 1. 依次加载
+        // async function loadSync() {
+        //     for (let i = 0; i < urlImg.length; i++) {
+        //         let img = await loadImg(urlImg[i]);
+        //         document.body.appendChild(img);
+        //     }
+        // }
+        // loadSync()
+        // // 2.并行加载
+        // function loadAsync() {
+        //     urlImg.forEach(async item => { //这里map也行 这里需要async修饰一下
+        //         let img = await loadImg(item);
+        //         document.body.appendChild(img);
+        //     })
+        //     // [1,2,3].forEach(item=>console.log(item));
+        //     // console.log('hello world');
+        // }
+        // loadAsync()
+        // 3. es5实现一个轮询
+        // function loopFunc() {
+        //     var loaded = [];
+        //     urlImg.forEach(item => {
+        //         let img = new Image();
+        //         img.src = item;
+        //         img.onload = () => {
+        //             loaded.push(img);
+        //             if (loaded.length == urlImg.length) {
+        //                 loaded.forEach(value => document.body.appendChild(value))
+        //             }
+        //         }
+        //     })
+        // }
+        // loopFunc()
+
+
+
+
+
+        //用es5简单实现一个Promise
+        //调用函数的时候promise才会执行
+        function myPromise(func) {
+            func(this.resolve.bind(this), this.reject.bind(this))
+        }
+
+        myPromise.prototype.resolve = function (res) {
+            console.log('resolve...', this)
+            setTimeout(() => { //异步操作
+                this.resolveFunc(res);
+            }, 0)
+        }
+
+        myPromise.prototype.reject = function () {
+
+        }
+        //promise在then方法里处理
+        // 封装then方法,传入promise状态改变的处理函数
+        myPromise.prototype.then = function (resolve, reject) {
+            this.resolveFunc = resolve;
+            this.rejectFunc = reject;  //这两个都是同步操作
+        }
+
+        var loadImg = (src) => {
+            return new Promise((resolve, reject) => {
+                var img = new Image();
+                img.src = src;
+                img.onload = () => {
+                    resolve(img);
+                    reject(new Error());
+                }
+                img.onerror = () => {
+                    reject(new Error());
+                }
+            })
+        }
+        loadImg(url).then(res=>{
+            console.log('使用自己封装的promise...',res);
+            document.body.appendChild(res);
+        },err=>{
+            console.log('err...',err);
+        })
+        
+    </script>
+
+</body>
+
+</html>

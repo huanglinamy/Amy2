@@ -1,0 +1,6 @@
+在git里面搜索antd pro 找到14.7k的那个
+git clone https://github.com/ant-design/ant-design-pro.git
+克隆下来之后进行以下操作
+cd ant-design-pro
+npm install 或 yarn install
+npm start 或 yarn start 运行之后会出来一个分析报告页面
