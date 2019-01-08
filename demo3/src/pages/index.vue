@@ -32,18 +32,23 @@
         <li>趋势榜单</li>
         <li>研究报告</li>
       </div>
+      <Eacharts />
     </div>
     <div class="footers"></div>
   </div>
 </template>
 
 <script>
+import Eacharts from '../echarts/index';
 export default {
   name: "page",
   data() {
     return {
       isShow: true
     };
+  },
+  components:{
+    Eacharts
   },
   methods: {
     btn: function() {
@@ -72,7 +77,7 @@ export default {
     display: flex;
     flex-direction: column;
     background: rgb(245, 242, 242);
-    padding: 0 0.8rem;
+    /* padding: 0 0.8rem; */
   }
   .headers {
     width: 100%;
@@ -80,6 +85,9 @@ export default {
     background: url("../static/imgs/pc.jpg") no-repeat;
     background-size: cover;
     border-bottom: 0.015rem solid rgb(43, 43, 88);
+    position: fixed;
+    left:0;
+    top:0;
   }
   .headers_ul {
     width: 100%;
@@ -87,9 +95,9 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
+    /* position: fixed;
     left: 10%;
-    top: 0;
+    top: 0; */
   }
   .headers_ul > li {
     width: 6%;
@@ -102,6 +110,7 @@ export default {
   .sections {
     width: 100%;
     flex: 1;
+    overflow-y:auto;
   }
 
   .banners {

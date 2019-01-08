@@ -1,7 +1,7 @@
 <template>
   <div id="app">
        <!-- <button @click="login">登陆</button> -->
-       <router-view />
+        <router-view></router-view>
   </div>
 </template>
 
@@ -16,7 +16,7 @@ export default {
   methods: {
     login(){
       //登录
-      JSBridge.invoke('app', 'login999', {
+      JSBridge.invoke('app', 'log999', {
         loginCallBackName: res=>{
           console.log('res...', res);
         },
@@ -47,9 +47,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  // margin-top: 60px;
 }
-// button{
-//   font-size:0.6rem;
-// }
 </style>

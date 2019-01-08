@@ -11,9 +11,9 @@ Vue.use(Popup);
 Vue.use(Picker);
 
 // 自定义过滤器
-Vue.filter('filterCity', function(value){
+Vue.filter('filterCity', function(value, reg){
   if (value){
-    return value.replace(/\(签发地\)/gi, '')
+    return value.replace(reg, '')
   }else{
     return ''
   }

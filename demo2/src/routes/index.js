@@ -1,9 +1,18 @@
 import VueRouter from 'vue-router';
 import Vue from 'vue';
 
+import {getToken} from '@/utils/index';
+import {doLogin} from '@/api/index';
+
 // 路由组件
-import IndexPage from '@/pages/index.vue';
-import Login from '@/pages/login.vue';
+// import IndexPage from '@/pages/index.vue';
+// import FaqPage from '@/pages/Faq.vue';
+// import AddressPage from '@/pages/Address.vue';
+
+// 路由按需加载
+const IndexPage = ()=>import('@/pages/index.vue');
+const FaqPage = ()=>import('@/pages/Faq.vue');
+const AddressPage = ()=>import('@/pages/Address.vue');
 
 Vue.use(VueRouter);
 
@@ -12,8 +21,11 @@ const router = new VueRouter({
     path: '/index',
     component: IndexPage
   },{
-    path: '/login',
-    component: Login
+    path: '/faq',
+    component: FaqPage
+  },{
+    path: '/address',
+    component: AddressPage
   },{
     path: '*',
     redirect: '/index'
@@ -22,11 +34,15 @@ const router = new VueRouter({
 
 // 导航守卫
 router.beforeEach((to, from, next)=>{
-  console.log('1111');
-  next();
+  if (getToken()){
+    next();
+  }else{
+    // 调起客户端的登陆
+    doLogin();
+  }
 })
 
-router.afterEach((to, from, next)=>{
+router.afterEach((to, from)=>{
 
 })
 
