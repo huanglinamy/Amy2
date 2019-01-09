@@ -13,6 +13,7 @@ import {doLogin} from '@/api/index';
 const IndexPage = ()=>import('@/pages/index.vue');
 const FaqPage = ()=>import('@/pages/Faq.vue');
 const AddressPage = ()=>import('@/pages/Address.vue');
+const CanvasPage = ()=>import('@/pages/Canvas.vue');
 
 Vue.use(VueRouter);
 
@@ -26,6 +27,9 @@ const router = new VueRouter({
   },{
     path: '/address',
     component: AddressPage
+  },{
+    path: '/canvas',
+    component: CanvasPage
   },{
     path: '*',
     redirect: '/index'

@@ -16,9 +16,6 @@
              <TypePicker/>
              <CityPicker/>
 
-           
-
-
           <div class="serverprice">
                 <span>服务费</span>
                 <span>￥398</span>
@@ -30,12 +27,12 @@
           
              <div class="found">
                  <router-link to="/faq">常见问题?</router-link>
-                  <router-link to="/address">去收货地址页面</router-link>
+                 <router-link to="/address">去收货地址页面</router-link>
              </div>
               <!-- <button @click="pay">立即支付</button> -->
               <div class="file">
                   <input type="file" @change="fileUpload">
-                  <span>图片上传</span>
+                  <span><router-link to="/canvas">图片上传</router-link></span>
              </div>
              <img :src="src">
 
@@ -56,7 +53,7 @@
 </template>
 
 <script>
-var $ = require('zepto');
+// var $ = require('zepto');
 import Upload from '@/components/Upload'
 import TypePicker from '@/components/TypePicker'
 import CityPicker from '@/components/CityPicker'
@@ -70,6 +67,13 @@ export default {
     }
   },
   created() {
+    console.log(1223);
+  },
+  activated(){
+    console.log(1224);
+  },
+  deactivated(){
+     console.log(1225);
   },
   components: {
     Upload,
@@ -77,6 +81,9 @@ export default {
     CityPicker
   },
   methods: {
+     cb(res){
+      this.src = res;
+    },
     pay(){
       doPay();
     },

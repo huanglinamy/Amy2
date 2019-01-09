@@ -13,6 +13,7 @@
         <button @click="cancel">取消</button>
       </div>
     </div>
+    <p>{{num}}</p>
   </ul>
 </template>
 
@@ -28,6 +29,18 @@ export default {
     }
   },
   name: 'Upload',
+  inject: {
+    num: {
+      default: 0
+    },
+    login: {
+      name: 'login',
+      default: ()=>{}
+    }
+  },
+  mounted(){
+    this.login();
+  },
   computed: {
     ...mapState({
       list: state=>state.upload.list

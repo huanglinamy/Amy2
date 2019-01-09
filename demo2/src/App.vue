@@ -1,7 +1,9 @@
 <template>
   <div id="app">
        <!-- <button @click="login">登陆</button> -->
-        <router-view></router-view>
+       <keep-alive exclude="Index">
+            <router-view></router-view>
+       </keep-alive>
   </div>
 </template>
 
@@ -13,16 +15,22 @@ export default {
     return {
     }
   },
+   provide(){
+    return {
+      // num: 10000,
+      login: ()=>{
+        console.log('调用了login');
+        this.login();
+      }
+    }
+  },
   methods: {
     login(){
       //登录
-      JSBridge.invoke('app', 'log999', {
+      JSBridge.invoke('app', 'login', {
         loginCallBackName: res=>{
           console.log('res...', res);
         },
-        a: 1,
-        b: 2,
-        c: 3
       });
     }
   }
