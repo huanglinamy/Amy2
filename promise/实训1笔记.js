@@ -193,3 +193,18 @@
 
 
 // cto 首席执行官
+
+
+// Element UI：
+// Form表单
+// Table表格
+// MessageBox弹框
+// NavMenu导航菜单
+// Breadcrumb面包屑
+
+
+// axios
+// baseURL
+// token
+// 防抖  节流
+// 有进度条是混合app 没有进度条是app
