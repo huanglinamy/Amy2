@@ -46,7 +46,7 @@
           <el-button
             size="mini"
             type="danger"
-            @clickk="handleDelete(scope.$index, scope.row)">分配权限</el-button>
+            @click="handleDelete(scope.$index, scope.row)">分配权限</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -91,11 +91,11 @@
             :key="tag"
             style="marginRight: 5px"
             :type="tag.type">
-            <span  @clickk="selectTag">{{tag}}</span>
+            <span  @click="selectTag">{{tag}}</span>
           </el-tag>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @clickk="submitForm()">提交</el-button>
+          <el-button type="primary" @click="submitForm()">提交</el-button>
           <el-button @click="handleClose">取消</el-button>
         </el-form-item>
       </el-form>
@@ -117,8 +117,7 @@
       }
       return {
         type: '',
-        // tags: ['developer','producter','boss','operator', 'designer'], 
-        tags: ['face','render','boss'], 
+        tags: ['developer','producter','boss','operator', 'designer'], 
         myTag: [],
         search: '',
         current: {},
