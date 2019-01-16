@@ -27,7 +27,7 @@ export function getUserInfo(token) {
   })
 }
 
-export function register(username, password, phone){
+export function register(username, password, phone) {
   return request({
     url: '/users/register',
     method: 'post',

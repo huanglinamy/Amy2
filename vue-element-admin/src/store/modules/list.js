@@ -1,4 +1,4 @@
-import {getUserList} from '@/api/list'
+import { getUserList, updateUserInfo, deleteUser } from '@/api/list'
 
 const state = {
   list: [],
@@ -6,24 +6,54 @@ const state = {
 }
 
 const mutations = {
-  updateList(state, list){
-    state.list = list;
+  updateList(state, list) {
+    state.list = list
   }
 }
 
 const actions = {
   // 获取用户列表
-  GetUserList({commit}, query){
-    return new Promise((resolve, reject)=>{
-      getUserList(query).then(res=>{
-        if (res.data.code == 1){
+  GetUserList({ commit }, query) {
+    return new Promise((resolve, reject) => {
+      getUserList(query).then(res => {
+        if (res.data.code === 1) {
           commit('updateList', res.data.data.list)
-          resolve();
-        }else{
-          reject();
+          resolve()
+        } else {
+          reject()
         }
-      }).catch(err=>{
-        reject(err);
+      }).catch(err => {
+        reject(err)
+      })
+    })
+  },
+  // 更新用户信息
+  UpdateUserInfo({ commit }, data) {
+    return new Promise((resolve, reject) => {
+      updateUserInfo(data).then(res => {
+        console.log('res...', res)
+        if (res.data.code === 1) {
+          resolve(res.data.msg)
+        } else {
+          reject(res.data.msg)
+        }
+      }).catch(err => {
+        reject(err)
+      })
+    })
+  },
+  // 删除用户
+  DeleteUser({ commit }, data) {
+    return new Promise((resolve, reject) => {
+      deleteUser(data).then(res => {
+        console.log('res...', res)
+        if (res.data.code === 1) {
+          resolve(res.data.msg)
+        } else {
+          reject(res.data.msg)
+        }
+      }).catch(err => {
+        reject(err)
       })
     })
   }
