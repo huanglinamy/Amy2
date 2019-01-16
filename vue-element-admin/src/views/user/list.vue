@@ -12,6 +12,7 @@
         prop="avatar">
          <template slot-scope="scope">
           <img :src="scope.row.avatar" class="user-avatar"/>
+          <!-- <img src="https://fms-image.missfresh.cn/a05b56759fdc41079f01c4478163ad09.jpg?iopcmd=thumbnail&type=4&width=200" /> -->
         </template>
       </el-table-column>
       <el-table-column
@@ -33,6 +34,26 @@
        <el-table-column
         label="Roler"
         prop="">
+        <template slot-scope="scope">
+          <el-tag
+            v-for="tag in scope.row.rolers"
+            :key="tag"
+            style="marginRight: 5px">
+            {{tag}}
+          </el-tag>
+        </template>
+      </el-table-column>
+       <el-table-column
+        label="Access"
+        prop="">
+        <template slot-scope="scope">
+          <el-tag
+            v-for="tag in scope.row.access"
+            :key="tag"
+            style="marginRight: 5px">
+            {{tag}}
+          </el-tag>
+        </template>
       </el-table-column>
       <el-table-column
         align="right">
@@ -64,10 +85,10 @@
       width="50%"
       :before-close="handleClose">
       <el-form :model="current" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-        <el-form-item label="姓名" prop="username">
+        <el-form-item v-if="type=='edit'" label="姓名" prop="username">
           <el-input type="text" v-model="current.username" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="头像" prop="avatar">
+        <el-form-item v-if="type=='edit'" label="头像" prop="avatar">
           <el-upload
             class="avatar-uploader"
             action="https://jsonplaceholder.typicode.com/posts/"
@@ -76,13 +97,13 @@
             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
           </el-upload>
         </el-form-item>
-        <el-form-item label="手机号" prop="phone">
+        <el-form-item v-if="type=='edit'" label="手机号" prop="phone">
           <el-input type="text" v-model="current.phone" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="邮箱" prop="email">
+        <el-form-item v-if="type=='edit'" label="邮箱" prop="email">
           <el-input type="text" v-model="current.email" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="地址" prop="address">
+        <el-form-item v-if="type=='edit'" label="地址" prop="address">
           <el-input type="text" v-model="current.address" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item v-if="type=='permission'" label="我的角色" prop="roler">
@@ -135,7 +156,7 @@
       }
       return {
         type: '',
-        tags: ['developer','producter','boss','operator', 'designer'],
+        tags: ['boss','developer','producter','operator', 'designer'],
         myTag: [],
         search: '',
         current: {},
@@ -160,7 +181,8 @@
       ...mapActions({
         getUserList: 'list/GetUserList',
         updateUserInfo: 'list/UpdateUserInfo',
-        deleteUser: 'list/DeleteUser'
+        deleteUser: 'list/DeleteUser',
+        modifyRule: 'list/ModifyRule'
       }),
       loadData(page){
         this.currentPage = page;
@@ -193,32 +215,55 @@
         this.dialogVisible = true;
         this.type = 'permission';
         this.current = {...row};
-        console.log(index, row);
+        this.myTag = [...row.rolers];
+        // console.log(index, row);
       },
       handleClose(){
         this.dialogVisible = false;
       },
       submitForm(){
-        this.$refs.ruleForm.validate(valid=>{
-          if (valid){
-            let {id, username, address, email, phone} = this.current;
-            this.updateUserInfo({id,username,address,email,phone}).then(res=>{
-              this.$message({
-                message: res,
-                type: 'success'
-              });
-              this.dialogVisible = false;
-              // 重新请求数据
-              this.getUserList([`page=${this.currentPage}`])
-            }).catch(err=>{
-              this.$message({
-                message: error,
-                type: 'error'
-              });
-              this.dialogVisible = false;
-            })
-          }
-        })
+        if (this.type == 'edit'){
+          this.$refs.ruleForm.validate(valid=>{
+            if (valid){
+              let {id, username, address, email, phone} = this.current;
+              this.updateUserInfo({id,username,address,email,phone}).then(res=>{
+                this.$message({
+                  message: res,
+                  type: 'success'
+                });
+                this.dialogVisible = false;
+                // 重新请求数据
+                this.getUserList([`page=${this.currentPage}`])
+              }).catch(err=>{
+                this.$message({
+                  message: error,
+                  type: 'error'
+                });
+                this.dialogVisible = false;
+              })
+            }
+          })
+        }else if(this.type == 'permission'){
+          // 把角色名转为角色id
+          let rolersId = this.myTag.map(item=>{
+            return this.tags.findIndex(value=>value==item)+1
+          })
+          this.modifyRule({uid:this.current.id, rolersId}).then(res=>{
+            this.$message({
+              message: res,
+              type: 'success'
+            });
+            this.dialogVisible = false;
+            // 重新请求数据
+            this.getUserList([`page=${this.currentPage}`])
+          }).catch(err=>{
+            this.$message({
+              message: error,
+              type: 'error'
+            });
+            this.dialogVisible = false;
+          })
+        }
       },
       selectTag(e){
         console.log('e...', e);

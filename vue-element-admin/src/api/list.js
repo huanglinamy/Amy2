@@ -30,3 +30,12 @@ export function deleteUser(data) {
     data
   })
 }
+
+// 为用户分配角色
+export function modifyRule(data) {
+  return request({
+    url: '/users/action',
+    method: 'put',
+    data
+  })
+}
