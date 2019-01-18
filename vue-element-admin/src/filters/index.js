@@ -1,6 +1,8 @@
+
 // set function parseTime,formatTime to filter
 export { parseTime, formatTime } from '@/utils'
 
+// 加个复数
 function pluralize(time, label) {
   if (time === 1) {
     return time + label
@@ -8,6 +10,7 @@ function pluralize(time, label) {
   return time + label + 's'
 }
 
+// 计算多久之前
 export function timeAgo(time) {
   const between = Date.now() / 1000 - Number(time)
   if (between < 3600) {
@@ -37,6 +40,7 @@ export function numberFormatter(num, digits) {
   return num.toString()
 }
 
+// 千分符
 export function toThousandFilter(num) {
   return (+num || 0).toString().replace(/^-?\d+/g, m => m.replace(/(?=(?!\b)(\d{3})+$)/g, ','))
 }

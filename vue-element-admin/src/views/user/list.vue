@@ -12,7 +12,14 @@
         prop="avatar">
          <template slot-scope="scope">
           <img :src="scope.row.avatar" class="user-avatar"/>
-          <!-- <img src="https://fms-image.missfresh.cn/a05b56759fdc41079f01c4478163ad09.jpg?iopcmd=thumbnail&type=4&width=200" /> -->
+     <!-- <img src="https://fms-image.missfresh.cn/a05b56759fdc41079f01c4478163ad09.jpg?iopcmd=thumbnail&type=4&width=200" /> -->
+        </template>
+      </el-table-column>
+      <el-table-column
+        label="createTime"
+        prop="avatar">
+         <template slot-scope="scope">
+          <span>{{scope.row.create_time | toThousandFilter}}</span>
         </template>
       </el-table-column>
       <el-table-column
@@ -91,7 +98,8 @@
         <el-form-item v-if="type=='edit'" label="头像" prop="avatar">
           <el-upload
             class="avatar-uploader"
-            action="https://jsonplaceholder.typicode.com/posts/"
+            action="http://123.206.55.50:11000/upload"
+            :on-success='upload'
             :show-file-list="false">
             <img v-if="current.avatar" :src="current.avatar" class="avatar">
             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
@@ -184,6 +192,17 @@
         deleteUser: 'list/DeleteUser',
         modifyRule: 'list/ModifyRule'
       }),
+      upload(res, file){
+       console.log(res,'upload')
+       if(res.code == 1) {
+         this.current.avatar = res.data[0].path
+       } else {
+         this.$message({
+            message: res.msg,
+            type: 'error'
+          });
+       }
+      },
       loadData(page){
         this.currentPage = page;
         console.log('page...', page);
@@ -225,8 +244,8 @@
         if (this.type == 'edit'){
           this.$refs.ruleForm.validate(valid=>{
             if (valid){
-              let {id, username, address, email, phone} = this.current;
-              this.updateUserInfo({id,username,address,email,phone}).then(res=>{
+              let {id, username, address, email, phone,avatar} = this.current;
+              this.updateUserInfo({id,username,address,email,phone,avatar}).then(res=>{
                 this.$message({
                   message: res,
                   type: 'success'

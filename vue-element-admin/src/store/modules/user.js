@@ -49,6 +49,7 @@ const user = {
     LoginByUsername({ commit }, userInfo) {
       const username = userInfo.username.trim()
       return new Promise((resolve, reject) => {
+        console.log(userInfo)
         loginByUsername(username, md5(userInfo.password + '1605A')).then(response => {
           // console.log('response...', response, md5(userInfo.password+'1605A'));
           commit('SET_TOKEN', response.data.data.token)
@@ -63,7 +64,7 @@ const user = {
     registerByUserName({ commit }, userInfo) {
       return new Promise((resolve, reject) => {
         let {username, password, phone} = userInfo
-        register(username, md5(password + '1606A'), phone).then(response => {
+        register(username, md5(password + '1605A'), phone).then(response => {
           console.log('response...', response)
           if (response.data.code === 1) {
             commit('SET_TOKEN', 'admin')

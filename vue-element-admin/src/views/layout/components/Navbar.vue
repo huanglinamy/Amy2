@@ -3,8 +3,8 @@
     <hamburger :toggle-click="toggleSideBar" :is-active="sidebar.opened" class="hamburger-container"/>
 
     <breadcrumb class="breadcrumb-container"/>
-
     <div class="right-menu">
+      <span class="name">{{name}}</span>
       <template v-if="device!=='mobile'">
         <error-log class="errLog-container right-menu-item"/>
 
@@ -57,7 +57,6 @@ import Screenfull from '@/components/Screenfull'
 import SizeSelect from '@/components/SizeSelect'
 import LangSelect from '@/components/LangSelect'
 import ThemePicker from '@/components/ThemePicker'
-
 export default {
   components: {
     Breadcrumb,
@@ -102,6 +101,9 @@ export default {
   }
   .breadcrumb-container{
     float: left;
+  }
+  .name{
+    vertical-align: top;
   }
   .errLog-container {
     display: inline-block;

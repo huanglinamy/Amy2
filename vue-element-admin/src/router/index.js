@@ -13,6 +13,7 @@ import tableRouter from './modules/table'
 import nestedRouter from './modules/nested'
 // 引入用户路由
 import userRouter from './modules/users'
+import organize from './modules/organize'
 
 /** note: Submenu only appear when children.length>=1
  *  detail see  https://panjiachen.github.io/vue-element-admin-site/guide/essentials/router-and-nav.html
@@ -93,6 +94,7 @@ export const constantRouterMap = [
     ]
   },
   userRouter,
+  organize,
   {
     path: '/guide',
     component: Layout,
@@ -260,7 +262,7 @@ export const asyncRouterMap = [
       title: 'excel',
       icon: 'excel'
     },
-    children: [
+    children: [ 
       {
         path: 'export-excel',
         component: () => import('@/views/excel/exportExcel'),

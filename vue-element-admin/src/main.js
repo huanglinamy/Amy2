@@ -23,9 +23,24 @@ import './errorLog' // error log
 // 引入权限管理
 import './permission' // permission control
 // 引入mock拦截请求
-import './mock' // simulation data
+// import './mock' // simulation data
+// 引入v-charts
+import VCharts from 'v-charts'
+
 // 引入自定义过滤器
 import * as filters from './filters' // global filters
+// 引入自定义指令
+import permission from './directive/permission'
+
+import Mock from 'mockjs'
+
+Mock.mock(/\/abc\/123/, 'get', res => {
+  console.log('res...', res)
+})
+fetch('/abc/123')
+Vue.use(VCharts)
+// 注册指令
+Vue.directive('permission', permission)
 // 使用element-ui
 Vue.use(Element, {
   size: Cookies.get('size') || 'medium', // set element-ui default size
