@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 一、找出整型数组中乘积最大的三个数
+        //     给定一个包含整数的无序数组，要求找出乘积最大的三个数。
+
+        　　var array = [-10, 7, 29, 30, 5, -10, -70];
+    
+        　　function sorts(a, b) {
+        　　return a - b;
+        　　}
+
+        　　function Product(n) {
+        　　var str = n.sort(sorts);
+        　　var product1 = 1;
+        　　var product2 = 1;
+        　  var nex = str.length - 1;
+
+        　　for (var m = nex; m > nex - 3; m--) {
+        　　product1 = product1 * str[m];
+        　　}
+        　　product2 = str[0] * str[nex];
+        　　if (product1 > product2) return product1;
+        　　return product2
+        　　};
+           console.log(Product(array)) //21000
+    </script>
+</body>
+</html>
